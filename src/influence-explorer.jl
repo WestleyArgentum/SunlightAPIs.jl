@@ -13,3 +13,5 @@ function entity_search(auth::String, search_str; entity_type = nothing, options.
 
 	sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/entities.json", args; options...)
 end
+
+entity_search(search_str; auth = "", options...) = entity_search(auth, search_str; options...)
