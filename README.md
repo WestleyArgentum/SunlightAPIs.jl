@@ -1,4 +1,30 @@
-Sunlight.jl
-===========
+# Sunlight.jl
 
-A Julia package for interfacing with the Sunlight Foundation's APIs
+##### A Julia package for interfacing with the Sunlight Foundation's APIs
+
+## Quick start
+
+```julia
+
+```
+
+
+## API
+
+### Entity Search
+
+Search for politicians, individuals, organizations or industries with a given name.
+
+```julia
+entity_search(auth::String, search_str; entity_type = nothing)
+
+entity_search(search_str; auth = "", entity_type = nothing)
+```
+
+- `auth`: Your Sunlight API key - [you can get one here](http://sunlightfoundation.com/api/)
+- `search`: The name to search for. Spaces should be URL encoded or represented as a plus sign (+). There are no logical operators and no grouping.
+- `type`:   Filter results to a particular type of entity.
+    * `"politician"`
+    * `"organization"`
+    * `"individual"`
+    * `"industry"`
