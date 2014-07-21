@@ -41,5 +41,20 @@ entity_info(entity_id; auth = "", cycle = nothing)
 ```
 
 - `auth`: Your Sunlight API key ([get one here](http://sunlightfoundation.com/api/)).
-- `entity_id`: The unique ID of the entity that you'd like to look up.
+- `entity_id`: The transparencydata ID of the entity that you'd like to look up.
 - `cycle`: Limit contribution totals to the given election cycle(s).
+
+
+### Top Politicians
+
+By contributions received, in dollars.
+
+```julia
+top_politicians(auth::String, num = 16; cycle = nothing)
+
+top_politicians(num = 16; auth = "", cycle = nothing)
+```
+
+- `auth`: Your Sunlight API key ([get one here](http://sunlightfoundation.com/api/)).
+- `num`: The number of top-politicians you'd like to get.
+- `cycle`: Filter to get top-politicians by cycle(s).

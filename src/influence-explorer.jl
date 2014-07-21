@@ -28,3 +28,14 @@ end
 entity_info(entity_id; auth = "", options...) = entity_info(auth, entity_id; options...)
 
 # -------
+
+function top_politicians(auth::String, num = 16; cycle = nothing, options...)
+    args = Dict()
+    cycle != nothing && (args["cycle"] = cycle)
+
+    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pols/top_$num.json", args; options...)
+end
+
+top_politicians(num = 16; auth = "", options...) = top_politicians(auth, num; options...)
+
+# -------
