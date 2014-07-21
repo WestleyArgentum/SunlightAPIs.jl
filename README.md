@@ -11,7 +11,9 @@
 
 ## Influence Explorer API
 
-### Entity Search
+### Entity Lookups
+
+#### Entity Search
 Search for politicians, individuals, organizations or industries with a given name.
 
 ```julia
@@ -28,7 +30,7 @@ entity_search(search_str; auth = "", entity_type = nothing)
     * `"industry"`
 
 
-### Entity Info
+#### Entity Info
 Get general information about the given entity.
 
 ```julia
@@ -41,7 +43,9 @@ entity_info(entity_id; auth = "", cycle = nothing)
 - `cycle`: Limit contribution totals to the given election cycle(s).
 
 
-### Top Politicians
+### Politician Aggregates
+
+#### Top Politicians
 By contributions received, in dollars.
 
 ```julia
@@ -54,7 +58,7 @@ top_politicians(; auth = "", limit = 16, cycle = nothing)
 - `cycle`: Filter to get top-politicians by cycle(s).
 
 
-### Top Contributors
+#### Top Contributors
 The top contributing organizations to a given candidate. Giving is broken down into money given directly (by the organization's PAC), versus money given by individuals employed by or associated with the organization.
 
 ```julia
@@ -68,11 +72,11 @@ top_contributors(entity_id; auth = "", limit = nothing, cycle = nothing)
 - `cycle`: Filter results by cycle(s).
 
 
-### Top Industries
+#### Top Industries
 Top contributing industries, ranked by dollars given.
 
 ```julia
-top_industries(auth::String, entity_id; limit = nothing, cycle = nothing, options...)
+top_industries(auth::String, entity_id; limit = nothing, cycle = nothing)
 
 top_industries(entity_id; auth = "", limit = nothing, cycle = nothing)
 ```
@@ -82,11 +86,11 @@ top_industries(entity_id; auth = "", limit = nothing, cycle = nothing)
 - `cycle`: Filter results by cycle(s).
 
 
-### Unknown Industries
+#### Unknown Industries
 Contribution count and total for a politician from unknown industries.
 
 ```julia
-unknown_industries(auth::String, entity_id; cycle = nothing, options...)
+unknown_industries(auth::String, entity_id; cycle = nothing)
 
 unknown_industries(entity_id; auth = "", cycle = nothing)
 ```
@@ -95,7 +99,7 @@ unknown_industries(entity_id; auth = "", cycle = nothing)
 - `cycle`: Filter results by cycle(s).
 
 
-### Top Sectors
+#### Top Sectors
 Contribution totals by sector to a given politician. Sectors are codified by letter:
 - `A`: Agribusiness
 - `B`: Communications/Electronics
@@ -114,7 +118,7 @@ Contribution totals by sector to a given politician. Sectors are codified by let
 - `Z`: Administrative Use
 
 ```julia
-top_sectors(auth::String, entity_id; limit = nothing, cycle = nothing, options...)
+top_sectors(auth::String, entity_id; limit = nothing, cycle = nothing)
 
 top_sectors(entity_id; auth = "", limit = nothing, cycle = nothing)
 ```
@@ -124,10 +128,51 @@ top_sectors(entity_id; auth = "", limit = nothing, cycle = nothing)
 - `cycle`: Filter results by cycle(s).
 
 
+#### Local Breakdown
+A breakdown of how much of the money raised by a politician came from inside or outside their home state.
+
+```julia
+local_breakdown(auth::String, entity_id; cycle = nothing)
+
+local_breakdown(entity_id; auth = "", cycle = nothing)
+```
+- `auth`: Your Sunlight API key ([get one here](http://sunlightfoundation.com/api/)).
+- `entity_id`: The transparencydata ID of the entity that you'd like to look up.
+- `cycle`: Filter results by cycle(s).
 
 
+#### Contributor Type Breakdown
+A breakdown of how much of the money raised came from individuals versus organzations (PACs).
+
+```julia
+contributor_breakdown(auth::String, entity_id; cycle = nothing)
+
+contributor_breakdown(entity_id; auth = "", cycle = nothing)
+```
+- `auth`: Your Sunlight API key ([get one here](http://sunlightfoundation.com/api/)).
+- `entity_id`: The transparencydata ID of the entity that you'd like to look up.
+- `cycle`: Filter results by cycle(s).
 
 
+#### FEC Summary
+Latest figures from the FEC's summary report.
+
+```julia
+fec_summary(auth::String, entity_id)
+
+fec_summary(entity_id; auth = "")
+```
+- `auth`: Your Sunlight API key ([get one here](http://sunlightfoundation.com/api/)).
+- `entity_id`: The transparencydata ID of the entity that you'd like to look up.
 
 
+#### FEC Independent Expenditures
+Top independent expenditures for and against a politician.
 
+```julia
+fec_independent_expenditures(auth::String, entity_id)
+
+fec_independent_expenditures(entity_id; auth = "")
+```
+- `auth`: Your Sunlight API key ([get one here](http://sunlightfoundation.com/api/)).
+- `entity_id`: The transparencydata ID of the entity that you'd like to look up.

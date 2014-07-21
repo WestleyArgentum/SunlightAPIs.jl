@@ -11,7 +11,11 @@ export entity_search,
        top_contributors,
        top_industries,
        unknown_industries,
-       top_sectors
+       top_sectors,
+       local_breakdown,
+       contributor_breakdown,
+       fec_summary,
+       fec_independent_expenditures
 
 include("utils.jl")
 include("influence-explorer.jl")

@@ -87,14 +87,40 @@ top_sectors(entity_id; auth = "", options...) = top_sectors(auth, entity_id; opt
 
 # -------
 
+function local_breakdown(auth::String, entity_id; cycle = nothing, options...)
+    args = Dict()
+    cycle != nothing && (args["cycle"] = cycle)
 
+    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/contributors/local_breakdown.json", args; options...)
+end
 
+local_breakdown(entity_id; auth = "", options...) = local_breakdown(auth, entity_id; options...)
 
+# -------
 
+function contributor_breakdown(auth::String, entity_id; cycle = nothing, options...)
+    args = Dict()
+    cycle != nothing && (args["cycle"] = cycle)
 
+    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/contributors/type_breakdown.json", args; options...)
+end
 
+contributor_breakdown(entity_id; auth = "", options...) = contributor_breakdown(auth, entity_id; options...)
 
+# -------
 
+function fec_summary(auth::String, entity_id; options...)
+    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/fec_summary.json", Dict(); options...)
+end
 
+fec_summary(entity_id; auth = "", options...) = fec_summary(auth, entity_id; options...)
 
+# -------
 
+function fec_independent_expenditures(auth::String, entity_id; options...)
+    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/fec_indexp.json", Dict(); options...)
+end
+
+fec_independent_expenditures(entity_id; auth = "", options...) = fec_independent_expenditures(auth, entity_id; options...)
+
+# -------
