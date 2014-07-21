@@ -5,7 +5,8 @@ using JSON
 using HttpCommon
 using Requests
 
-export entity_search
+export entity_search,
+       entity_info
 
 include("utils.jl")
 include("influence-explorer.jl")
