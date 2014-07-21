@@ -17,3 +17,14 @@ end
 entity_search(search_str; auth = "", options...) = entity_search(auth, search_str; options...)
 
 # -------
+
+function entity_info(auth::String, entity_id; cycle = nothing, options...)
+    args = Dict()
+    cycle != nothing && (args["cycle"] = cycle)
+
+    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/entities/$entity_id.json", args; options...)
+end
+
+entity_info(entity_id; auth = "", options...) = entity_info(auth, entity_id; options...)
+
+# -------
