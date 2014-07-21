@@ -28,3 +28,18 @@ entity_search(search_str; auth = "", entity_type = nothing)
     * `"organization"`
     * `"individual"`
     * `"industry"`
+
+
+### Entity Info
+
+Get general information about the given entity.
+
+```julia
+entity_info(auth::String, entity_id; cycle = nothing)
+
+entity_info(entity_id; auth = "", cycle = nothing)
+```
+
+- `auth`: Your Sunlight API key - [you can get one here](http://sunlightfoundation.com/api/).
+- `entity_id`: The unique ID of the entity that you'd like to look up.
+- `cycle`: Limit contribution totals to the given election cycle(s).
