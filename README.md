@@ -50,11 +50,27 @@ entity_info(entity_id; auth = "", cycle = nothing)
 By contributions received, in dollars.
 
 ```julia
-top_politicians(auth::String, num = 16; cycle = nothing)
+top_politicians(auth::String; limit = 16, cycle = nothing)
 
-top_politicians(num = 16; auth = "", cycle = nothing)
+top_politicians(; auth = "", limit = 16, cycle = nothing)
 ```
 
 - `auth`: Your Sunlight API key ([get one here](http://sunlightfoundation.com/api/)).
-- `num`: The number of top-politicians you'd like to get.
+- `limit`: The number of top-politicians you'd like to get.
 - `cycle`: Filter to get top-politicians by cycle(s).
+
+
+### Top Contributors
+
+The top contributing organizations to a given candidate. Giving is broken down into money given directly (by the organization's PAC), versus money given by individuals employed by or associated with the organization.
+
+```julia
+top_contributors(auth::String, entity_id; limit = nothing, cycle = nothing)
+
+top_contributors(entity_id; auth = "", limit = nothing, cycle = nothing)
+```
+
+- `auth`: Your Sunlight API key ([get one here](http://sunlightfoundation.com/api/)).
+- `entity_id`: The transparencydata ID of the entity that you'd like to look up.
+- `limit`: The max number to return.
+- `cycle`: Filter results by cycle(s).

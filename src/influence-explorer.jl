@@ -29,13 +29,40 @@ entity_info(entity_id; auth = "", options...) = entity_info(auth, entity_id; opt
 
 # -------
 
-function top_politicians(auth::String, num = 16; cycle = nothing, options...)
+function top_politicians(auth::String; limit = 16, cycle = nothing, options...)
     args = Dict()
     cycle != nothing && (args["cycle"] = cycle)
 
-    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pols/top_$num.json", args; options...)
+    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pols/top_$limit.json", args; options...)
 end
 
-top_politicians(num = 16; auth = "", options...) = top_politicians(auth, num; options...)
+top_politicians(; auth = "", options...) = top_politicians(auth; options...)
 
 # -------
+
+function top_contributors(auth::String, entity_id; limit = nothing, cycle = nothing, options...)
+    args = Dict()
+    limit != nothing && (args["limit"] = limit)
+    cycle != nothing && (args["cycle"] = cycle)
+
+    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/contributors.json", args; options...)
+end
+
+top_contributors(entity_id; auth = "", options...) = top_contributors(auth, entity_id; options...)
+
+# -------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
