@@ -1,7 +1,7 @@
 
 sunlight_get(auth::String, api::URI, path, args; options...) = sunlight_get(auth, URI(api; path = path), args; options...)
 
-function sunlight_get(auth::String, route::URI, args; query = Dict(), options...)
+function sunlight_get(auth::String, route::URI, args; query = Dict(), debug = false, options...)
     if auth == nothing || isempty(auth)
         error("Sunlight Foundation API key required! Get one here: http://sunlightfoundation.com/api")
     end
@@ -9,7 +9,16 @@ function sunlight_get(auth::String, route::URI, args; query = Dict(), options...
     query["apikey"] = auth
     merge!(query, args)
 
+    if debug
+        println("URI: ", route)
+        println("Params: ", query)
+    end
+
     r = get(route; query = query, options...)
+
+    if debug
+        println(r)
+    end
 
     handle_error(r)
 
