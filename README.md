@@ -9,7 +9,7 @@
 ```
 
 
-## API
+## Influence Explorer API
 
 ### Entity Search
 
@@ -74,3 +74,26 @@ top_contributors(entity_id; auth = "", limit = nothing, cycle = nothing)
 - `entity_id`: The transparencydata ID of the entity that you'd like to look up.
 - `limit`: The max number to return.
 - `cycle`: Filter results by cycle(s).
+
+
+### Top Industries
+
+Top contributing industries, ranked by dollars given.
+
+```julia
+top_industries(auth::String, entity_id; limit = nothing, cycle = nothing, options...)
+
+top_industries(entity_id; auth = "", limit = nothing, cycle = nothing)
+```
+
+- `auth`: Your Sunlight API key ([get one here](http://sunlightfoundation.com/api/)).
+- `entity_id`: The transparencydata ID of the entity that you'd like to look up.
+- `limit`: The max number to return.
+- `cycle`: Filter results by cycle(s).
+
+
+
+
+
+
+

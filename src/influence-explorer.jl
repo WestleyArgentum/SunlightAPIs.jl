@@ -52,6 +52,17 @@ top_contributors(entity_id; auth = "", options...) = top_contributors(auth, enti
 
 # -------
 
+function top_industries(auth::String, entity_id; limit = nothing, cycle = nothing, options...)
+    args = Dict()
+    limit != nothing && (args["limit"] = limit)
+    cycle != nothing && (args["cycle"] = cycle)
+
+    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/contributors/industries.json", args; options...)
+end
+
+top_industries(entity_id; auth = "", options...) = top_industries(auth, entity_id; options...)
+
+# -------
 
 
 
