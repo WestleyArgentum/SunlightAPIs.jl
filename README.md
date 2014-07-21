@@ -11,7 +11,7 @@
 
 ## Influence Explorer API
 
-### Entity Lookups
+### Entity Lookup Methods
 
 #### Entity Search
 Search for politicians, individuals, organizations or industries with a given name.
@@ -43,7 +43,7 @@ entity_info(entity_id; auth = "", cycle = nothing)
 - `cycle`: Limit contribution totals to the given election cycle(s).
 
 
-### Politician Aggregates
+### Politician Aggregates Methods
 
 #### Top Politicians
 By contributions received, in dollars.
