@@ -9,7 +9,9 @@ export entity_search,
        entity_info,
        top_politicians,
        top_contributors,
-       top_industries
+       top_industries,
+       unknown_industries,
+       top_sectors
 
 include("utils.jl")
 include("influence-explorer.jl")

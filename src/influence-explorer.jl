@@ -64,7 +64,28 @@ top_industries(entity_id; auth = "", options...) = top_industries(auth, entity_i
 
 # -------
 
+function unknown_industries(auth::String, entity_id; cycle = nothing, options...)
+    args = Dict()
+    cycle != nothing && (args["cycle"] = cycle)
 
+    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/contributors/industries_unknown.json", args; options...)
+end
+
+unknown_industries(entity_id; auth = "", options...) = unknown_industries(auth, entity_id; options...)
+
+# -------
+
+function top_sectors(auth::String, entity_id; limit = nothing, cycle = nothing, options...)
+    args = Dict()
+    limit != nothing && (args["limit"] = limit)
+    cycle != nothing && (args["cycle"] = cycle)
+
+    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/contributors/sectors.json", args; options...)
+end
+
+top_sectors(entity_id; auth = "", options...) = top_sectors(auth, entity_id; options...)
+
+# -------
 
 
 

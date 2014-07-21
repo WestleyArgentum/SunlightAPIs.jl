@@ -82,6 +82,50 @@ top_industries(entity_id; auth = "", limit = nothing, cycle = nothing)
 - `cycle`: Filter results by cycle(s).
 
 
+### Unknown Industries
+Contribution count and total for a politician from unknown industries.
+
+```julia
+unknown_industries(auth::String, entity_id; cycle = nothing, options...)
+
+unknown_industries(entity_id; auth = "", cycle = nothing)
+```
+- `auth`: Your Sunlight API key ([get one here](http://sunlightfoundation.com/api/)).
+- `entity_id`: The transparencydata ID of the entity that you'd like to look up.
+- `cycle`: Filter results by cycle(s).
+
+
+### Top Sectors
+Contribution totals by sector to a given politician. Sectors are codified by letter:
+- `A`: Agribusiness
+- `B`: Communications/Electronics
+- `C`: Construction
+- `D`: Defense
+- `E`: Energy/Natural Resources
+- `F`: Finance/Insurance/Real Estate
+- `H`: Health
+- `K`: Lawyers and Lobbyists
+- `M`: Transportation
+- `N`: Misc. Business
+- `Q`: Ideology/Single Issue
+- `P`: Labor
+- `W`: Other
+- `Y`: Unknown
+- `Z`: Administrative Use
+
+```julia
+top_sectors(auth::String, entity_id; limit = nothing, cycle = nothing, options...)
+
+top_sectors(entity_id; auth = "", limit = nothing, cycle = nothing)
+```
+- `auth`: Your Sunlight API key ([get one here](http://sunlightfoundation.com/api/)).
+- `entity_id`: The transparencydata ID of the entity that you'd like to look up.
+- `limit`: The max number to return.
+- `cycle`: Filter results by cycle(s).
+
+
+
+
 
 
 
