@@ -40,87 +40,20 @@ top_politicians(; auth = "", options...) = top_politicians(auth; options...)
 
 # -------
 
-function top_contributors(auth::String, entity_id; limit = nothing, cycle = nothing, options...)
-    args = Dict()
-    limit != nothing && (args["limit"] = limit)
-    cycle != nothing && (args["cycle"] = cycle)
+@sunlight_method__id_limit_cycle "top_contributors" "contributors.json"
 
-    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/contributors.json", args; options...)
-end
+@sunlight_method__id_limit_cycle "top_industries" "contributors/industries.json"
 
-top_contributors(entity_id; auth = "", options...) = top_contributors(auth, entity_id; options...)
+@sunlight_method__id_cycle "unknown_industries" "contributors/industries_unknown.json"
 
-# -------
+@sunlight_method__id_limit_cycle "top_sectors" "contributors/sectors.json"
 
-function top_industries(auth::String, entity_id; limit = nothing, cycle = nothing, options...)
-    args = Dict()
-    limit != nothing && (args["limit"] = limit)
-    cycle != nothing && (args["cycle"] = cycle)
+@sunlight_method__id_cycle "local_breakdown" "contributors/local_breakdown.json"
 
-    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/contributors/industries.json", args; options...)
-end
+@sunlight_method__id_limit_cycle "contributor_breakdown" "contributors/type_breakdown.json"
 
-top_industries(entity_id; auth = "", options...) = top_industries(auth, entity_id; options...)
+@sunlight_method__id_limit_cycle "fec_summary" "fec_summary.json"
 
-# -------
-
-function unknown_industries(auth::String, entity_id; cycle = nothing, options...)
-    args = Dict()
-    cycle != nothing && (args["cycle"] = cycle)
-
-    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/contributors/industries_unknown.json", args; options...)
-end
-
-unknown_industries(entity_id; auth = "", options...) = unknown_industries(auth, entity_id; options...)
-
-# -------
-
-function top_sectors(auth::String, entity_id; limit = nothing, cycle = nothing, options...)
-    args = Dict()
-    limit != nothing && (args["limit"] = limit)
-    cycle != nothing && (args["cycle"] = cycle)
-
-    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/contributors/sectors.json", args; options...)
-end
-
-top_sectors(entity_id; auth = "", options...) = top_sectors(auth, entity_id; options...)
-
-# -------
-
-function local_breakdown(auth::String, entity_id; cycle = nothing, options...)
-    args = Dict()
-    cycle != nothing && (args["cycle"] = cycle)
-
-    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/contributors/local_breakdown.json", args; options...)
-end
-
-local_breakdown(entity_id; auth = "", options...) = local_breakdown(auth, entity_id; options...)
-
-# -------
-
-function contributor_breakdown(auth::String, entity_id; cycle = nothing, options...)
-    args = Dict()
-    cycle != nothing && (args["cycle"] = cycle)
-
-    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/contributors/type_breakdown.json", args; options...)
-end
-
-contributor_breakdown(entity_id; auth = "", options...) = contributor_breakdown(auth, entity_id; options...)
-
-# -------
-
-function fec_summary(auth::String, entity_id; options...)
-    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/fec_summary.json", Dict(); options...)
-end
-
-fec_summary(entity_id; auth = "", options...) = fec_summary(auth, entity_id; options...)
-
-# -------
-
-function fec_independent_expenditures(auth::String, entity_id; options...)
-    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/fec_indexp.json", Dict(); options...)
-end
-
-fec_independent_expenditures(entity_id; auth = "", options...) = fec_independent_expenditures(auth, entity_id; options...)
+@sunlight_method__id "fec_independent_expenditures" "fec_indexp.json"
 
 # -------
