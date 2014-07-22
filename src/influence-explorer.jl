@@ -4,16 +4,16 @@ global INFLUENCE_EXPLORER_API = URI("http://transparencydata.com/")
 
 # -------
 
-macro sunlight_method__id_limit_cycle(method_name, method_route)
+macro sunlight_method__id_limit_cycle(method_name, route_fn)
     quote
         function $(esc(symbol(method_name)))(auth::String, entity_id; limit = nothing, cycle = nothing, options...)
-            method_route = $method_route
+            route = $route_fn(entity_id)
 
             args = Dict()
             limit != nothing && (args["limit"] = limit)
             cycle != nothing && (args["cycle"] = cycle)
 
-            sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/$method_route", args; options...)
+            sunlight_get(auth, INFLUENCE_EXPLORER_API, route, args; options...)
         end
 
         $(esc(symbol(method_name)))(entity_id; auth = "", options...) = $(esc(symbol(method_name)))(auth, entity_id; options...)
@@ -22,15 +22,15 @@ end
 
 # -------
 
-macro sunlight_method__id_cycle(method_name, method_route)
+macro sunlight_method__id_cycle(method_name, route_fn)
     quote
         function $(esc(symbol(method_name)))(auth::String, entity_id; cycle = nothing, options...)
-            method_route = $method_route
+            route = $route_fn(entity_id)
 
             args = Dict()
             cycle != nothing && (args["cycle"] = cycle)
 
-            sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/$method_route", args; options...)
+            sunlight_get(auth, INFLUENCE_EXPLORER_API, route, args; options...)
         end
 
         $(esc(symbol(method_name)))(entity_id; auth = "", options...) = $(esc(symbol(method_name)))(auth, entity_id; options...)
@@ -39,11 +39,11 @@ end
 
 # -------
 
-macro sunlight_method__id(method_name, method_route)
+macro sunlight_method__id(method_name, route_fn)
     quote
         function $(esc(symbol(method_name)))(auth::String, entity_id; options...)
-            method_route = $method_route
-            sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pol/$entity_id/$method_route", Dict(); options...)
+            route = $route_fn(entity_id)
+            sunlight_get(auth, INFLUENCE_EXPLORER_API, route, Dict(); options...)
         end
 
         $(esc(symbol(method_name)))(entity_id; auth = "", options...) = $(esc(symbol(method_name)))(auth, entity_id; options...)
@@ -52,21 +52,21 @@ end
 
 # -------
 
-@sunlight_method__id_limit_cycle "top_contributors" "contributors.json"
+@sunlight_method__id_limit_cycle "top_contributors" id->"/api/1.0/aggregates/pol/$id/contributors.json"
 
-@sunlight_method__id_limit_cycle "top_industries" "contributors/industries.json"
+@sunlight_method__id_limit_cycle "top_industries" id->"/api/1.0/aggregates/pol/$id/contributors/industries.json"
 
-@sunlight_method__id_cycle "unknown_industries" "contributors/industries_unknown.json"
+@sunlight_method__id_cycle "unknown_industries" id->"/api/1.0/aggregates/pol/$id/contributors/industries_unknown.json"
 
-@sunlight_method__id_limit_cycle "top_sectors" "contributors/sectors.json"
+@sunlight_method__id_limit_cycle "top_sectors" id->"/api/1.0/aggregates/pol/$id/contributors/sectors.json"
 
-@sunlight_method__id_cycle "local_breakdown" "contributors/local_breakdown.json"
+@sunlight_method__id_cycle "local_breakdown" id->"/api/1.0/aggregates/pol/$id/contributors/local_breakdown.json"
 
-@sunlight_method__id_limit_cycle "contributor_breakdown" "contributors/type_breakdown.json"
+@sunlight_method__id_limit_cycle "contributor_breakdown" id->"/api/1.0/aggregates/pol/$id/contributors/type_breakdown.json"
 
-@sunlight_method__id_limit_cycle "fec_summary" "fec_summary.json"
+@sunlight_method__id_limit_cycle "fec_summary" id->"/api/1.0/aggregates/pol/$id/fec_summary.json"
 
-@sunlight_method__id "fec_independent_expenditures" "fec_indexp.json"
+@sunlight_method__id "fec_independent_expenditures" id->"/api/1.0/aggregates/pol/$id/fec_indexp.json"
 
 
 
