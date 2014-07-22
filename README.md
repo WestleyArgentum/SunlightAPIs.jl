@@ -163,3 +163,63 @@ top_individuals(auth::String; limit = 16, cycle = nothing)
 
 top_individuals(; auth = "", limit = 16, cycle = nothing)
 ```
+
+
+#### Top Recipient Organizations
+Top organizations to which this individual has donated, by dollars given.
+
+```julia
+top_recipient_organizations(auth::String, entity_id; limit = nothing, cycle = nothing)
+
+top_recipient_organizations(entity_id; auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### Top Recipient Politicians
+Politicians to whom the individual has given the most money.
+
+```julia
+top_recipient_politicians(auth::String, entity_id; limit = nothing, cycle = nothing)
+
+top_recipient_politicians(entity_id; auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### Party Breakdown
+Details on how much an individual gave to each party.
+
+```julia
+party_breakdown(auth::String, entity_id; cycle = nothing)
+
+party_breakdown(entity_id; auth = "", cycle = nothing)
+```
+
+
+#### Lobbying Registrants
+A list of the lobbying firms which employed an individual.
+
+```julia
+lobbying_registrants(auth::String, entity_id; limit = nothing, cycle = nothing)
+
+lobbying_registrants(entity_id; auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### Lobbying Clients
+Clients an individual (lobbyist) was contracted to work for.
+
+```julia
+lobbying_clients(auth::String, entity_id; limit = nothing, cycle = nothing)
+
+lobbying_clients(entity_id; auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### Lobbying Issues
+Issue areas a lobbyist worked on.
+
+```julia
+lobbying_issues(auth::String, entity_id; limit = nothing, cycle = nothing)
+
+lobbying_issues(entity_id; auth = "", limit = nothing, cycle = nothing)
+```

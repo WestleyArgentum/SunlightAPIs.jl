@@ -68,7 +68,17 @@ end
 
 @sunlight_method__id "fec_independent_expenditures" id->"/api/1.0/aggregates/pol/$id/fec_indexp.json"
 
+@sunlight_method__id_limit_cycle "top_recipient_organizations" id->"/api/1.0/aggregates/indiv/$id/recipient_orgs.json"
 
+@sunlight_method__id_limit_cycle "top_recipient_politicians" id->"/api/1.0/aggregates/indiv/$id/recipient_pols.json"
+
+@sunlight_method__id_cycle "party_breakdown" id->"/api/1.0/aggregates/indiv/$id/recipients/party_breakdown.json"
+
+@sunlight_method__id_limit_cycle "lobbying_registrants" id->"/api/1.0/aggregates/indiv/$id/registrants.json"
+
+@sunlight_method__id_limit_cycle "lobbying_clients" id->"/api/1.0/aggregates/indiv/$id/clients.json"
+
+@sunlight_method__id_limit_cycle "lobbying_issues" id->"/api/1.0/aggregates/indiv/$id/issues.json"
 
 # -------
 
