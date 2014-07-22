@@ -99,7 +99,6 @@ entity_info(entity_id; auth = "", options...) = entity_info(auth, entity_id; opt
 function top_politicians(auth::String; limit = 16, cycle = nothing, options...)
     args = Dict()
     cycle != nothing && (args["cycle"] = cycle)
-    limit != nothing && (args["limit"] = limit)
 
     sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/pols/top_$limit.json", args; options...)
 end
