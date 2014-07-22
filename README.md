@@ -151,3 +151,15 @@ fec_independent_expenditures(auth::String, entity_id)
 
 fec_independent_expenditures(entity_id; auth = "")
 ```
+
+
+### Individual Aggregates
+
+#### Top Individuals
+By contributions given, in dollars.
+
+```julia
+top_individuals(auth::String; limit = 16, cycle = nothing)
+
+top_individuals(; auth = "", limit = 16, cycle = nothing)
+```

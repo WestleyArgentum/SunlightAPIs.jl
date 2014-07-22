@@ -15,7 +15,8 @@ export entity_search,
        local_breakdown,
        contributor_breakdown,
        fec_summary,
-       fec_independent_expenditures
+       fec_independent_expenditures,
+       top_individuals
 
 include("utils.jl")
 include("influence-explorer.jl")

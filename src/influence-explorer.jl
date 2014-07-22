@@ -104,3 +104,14 @@ function top_politicians(auth::String; limit = 16, cycle = nothing, options...)
 end
 
 top_politicians(; auth = "", options...) = top_politicians(auth; options...)
+
+# -------
+
+function top_individuals(auth::String; limit = 16, cycle = nothing, options...)
+    args = Dict()
+    cycle != nothing && (args["cycle"] = cycle)
+
+    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/indivs/top_$limit.json", args; options...)
+end
+
+top_individuals(; auth = "", options...) = top_individuals(auth; options...)
