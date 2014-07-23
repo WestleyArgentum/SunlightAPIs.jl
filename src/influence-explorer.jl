@@ -62,9 +62,9 @@ end
 
 @sunlight_method__id_cycle "local_breakdown" id->"/api/1.0/aggregates/pol/$id/contributors/local_breakdown.json"
 
-@sunlight_method__id_limit_cycle "contributor_breakdown" id->"/api/1.0/aggregates/pol/$id/contributors/type_breakdown.json"
+@sunlight_method__id_cycle "contributor_breakdown" id->"/api/1.0/aggregates/pol/$id/contributors/type_breakdown.json"
 
-@sunlight_method__id_limit_cycle "fec_summary" id->"/api/1.0/aggregates/pol/$id/fec_summary.json"
+@sunlight_method__id "fec_summary" id->"/api/1.0/aggregates/pol/$id/fec_summary.json"
 
 @sunlight_method__id "fec_independent_expenditures" id->"/api/1.0/aggregates/pol/$id/fec_indexp.json"
 
