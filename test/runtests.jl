@@ -4,6 +4,7 @@ using Base.Test
 
 function sunlight_test(fn, args...; auth = "", named_args...)
     print("Testing $fn ... ")
+
     # test different ways of passing in api key
     auth_first = fn(auth, args...)
     auth_named = fn(args...; auth = auth)

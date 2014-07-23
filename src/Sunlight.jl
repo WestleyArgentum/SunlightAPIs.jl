@@ -1,10 +1,16 @@
 
 module Sunlight
 
+import Base.print
+
 using JSON
 using HttpCommon
 using Requests
 
+# entity types (organization, individual, politician)
+export Entity, Org, Ind, Pol
+
+# Influence Explorer API
 export entity_search,
        entity_info,
        top_politicians,
