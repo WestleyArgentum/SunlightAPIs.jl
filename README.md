@@ -223,3 +223,175 @@ lobbying_issues(auth::String, entity_id; limit = nothing, cycle = nothing)
 
 lobbying_issues(entity_id; auth = "", limit = nothing, cycle = nothing)
 ```
+
+
+### Organization Aggregates
+
+#### Top Organizations
+By contributions given, in dollars.
+
+```julia
+top_organizations(auth::String; limit = 16, cycle = nothing)
+
+top_organizations(; auth = "", limit = 16, cycle = nothing)
+```
+
+
+#### Top Recipients
+Top recipients of money from this organization, by dollars received.
+
+```julia
+top_recipients(auth::String, entity_id::Union(String, Org); limit = nothing, cycle = nothing)
+
+top_recipients(entity_id::Union(String, Org); auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### PAC Recipients
+Top PACs receiving money from a given organization.
+
+```julia
+pac_recipients(auth::String, entity_id::Union(String, Org); limit = nothing, cycle = nothing)
+
+pac_recipients(entity_id::Union(String, Org); auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### Party Breakdown
+Portion of giving from an organization that went to each party.
+
+```julia
+party_breakdown(auth::String, entity_id::Union(String, Org); cycle = nothing)
+
+party_breakdown(entity_id::Union(String, Org); auth = "", cycle = nothing)
+```
+
+
+#### State/Federal (Level) Breakdown
+Portion of giving from an organization that went state candidates versus federal candidates.
+
+```julia
+state_federal_breakdown(auth::String, entity_id::Union(String, Org); cycle = nothing)
+
+state_federal_breakdown(entity_id::Union(String, Org); auth = "", cycle = nothing)
+```
+
+
+#### Lobbing Registrants
+Lobbying firms hired by an organization.
+
+```julia
+lobbing_registrants(auth::String, entity_id::Union(String, Org); limit = nothing, cycle = nothing)
+
+lobbing_registrants(entity_id::Union(String, Org); auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### Lobbying Issues
+Issue areas an organization has hired lobbyists for.
+
+```julia
+lobbying_issues(auth::String, entity_id::Union(String, Org); limit = nothing, cycle = nothing)
+
+lobbying_issues(entity_id::Union(String, Org); auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### Bills
+Bills an organization has lobbied on.
+
+```julia
+bills(auth::String, entity_id::Union(String, Org); limit = nothing, cycle = nothing)
+
+bills(entity_id::Union(String, Org); auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### Lobbyists
+Lobbyists hired by an organization.
+
+```julia
+lobbyists(auth::String, entity_id::Union(String, Org); limit = nothing, cycle = nothing)
+
+lobbyists(entity_id::Union(String, Org); auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### Registrant Clients
+Top clients that hired an organization (lobbying firm).
+
+```julia
+registrant_clients(auth::String, entity_id::Union(String, Org); limit = nothing, cycle = nothing)
+
+registrant_clients(entity_id::Union(String, Org); auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### Registrant Issues
+Top issue areas an organization (lobbying firm) has lobbied on.
+
+```julia
+registrant_issues(auth::String, entity_id::Union(String, Org); limit = nothing, cycle = nothing)
+
+registrant_issues(entity_id::Union(String, Org); auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### Registrant Bills
+Top bills an organization (lobbying firm) has lobbied on.
+
+```julia
+registrant_bills(auth::String, entity_id::Union(String, Org); limit = nothing, cycle = nothing)
+
+registrant_bills(entity_id::Union(String, Org); auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### Registrant Lobbyists
+Top lobbyists an organization (lobbying firm) employs, by registrations.
+
+```julia
+registrant_lobbyists(auth::String, entity_id::Union(String, Org); limit = nothing, cycle = nothing)
+
+registrant_lobbyists(entity_id::Union(String, Org); auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### Mentions in Regulations
+Regulatory dockets that most frequently mention an organization
+
+```julia
+mentions_in_regulations(auth::String, entity_id::Union(String, Org); limit = nothing, cycle = nothing)
+
+mentions_in_regulations(entity_id::Union(String, Org); auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### Regulatory Comment Submissions
+Regulatory dockets with the most comment submissions from an organization.
+
+```julia
+regulatory_comment_submissions(auth::String, entity_id::Union(String, Org); limit = nothing, cycle = nothing)
+
+regulatory_comment_submissions(entity_id::Union(String, Org); auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### FACA Memberships
+Lists employees of an organization ith memberships on federal advisory committees.
+
+```julia
+faca_memberships(auth::String, entity_id::Union(String, Org); limit = nothing, cycle = nothing)
+
+faca_memberships(entity_id::Union(String, Org); auth = "", limit = nothing, cycle = nothing)
+```
+
+
+#### FEC Summary
+Latest figures for an organization from the FEC's summary report, current election cycle only.
+
+```julia
+fec_summary(auth::String, entity_id::Union(String, Org))
+
+fec_summary(entity_id::Union(String, Org); auth = "")
+```

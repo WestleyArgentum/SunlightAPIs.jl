@@ -27,9 +27,10 @@ end
 
 # -------
 
-function runtests(api_key; pol_id = "597e02e7d1b04d83976913da1b8e2998",
-                           ind_id = "a03df5d9b20e467fa0ceaefa94c4491e",
-                           limit = 2,
+function runtests(api_key; pol_id = Pol("597e02e7d1b04d83976913da1b8e2998"),
+                           ind_id = Ind("a03df5d9b20e467fa0ceaefa94c4491e"),
+                           org_id = Org("52a1620b2ff543ebb74718fbff742529"),
+                           limit = 1,
                            cycle = 2012)
 
     sunlight_test(top_contributors, pol_id; limit = limit, cycle = cycle, auth = api_key)
@@ -46,6 +47,23 @@ function runtests(api_key; pol_id = "597e02e7d1b04d83976913da1b8e2998",
     sunlight_test(lobbying_registrants, ind_id; limit = limit, cycle = cycle, auth = api_key)
     sunlight_test(lobbying_clients, ind_id; limit = limit, cycle = cycle, auth = api_key)
     sunlight_test(lobbying_issues, ind_id; limit = limit, cycle = cycle, auth = api_key)
+    sunlight_test(top_recipients, org_id; limit = limit, cycle = cycle, auth = api_key)
+    sunlight_test(pac_recipients, org_id; limit = limit, cycle = cycle, auth = api_key)
+    sunlight_test(party_breakdown, org_id; cycle = cycle, auth = api_key)
+    sunlight_test(state_federal_breakdown, org_id; cycle = cycle, auth = api_key)
+    sunlight_test(lobbing_registrants, org_id; limit = limit, cycle = cycle, auth = api_key)
+    sunlight_test(lobbying_issues, org_id; limit = limit, cycle = cycle, auth = api_key)
+    sunlight_test(bills, org_id; limit = limit, cycle = cycle, auth = api_key)
+    sunlight_test(lobbyists, org_id; limit = limit, cycle = cycle, auth = api_key)
+    sunlight_test(registrant_clients, org_id; limit = limit, cycle = cycle, auth = api_key)
+    sunlight_test(registrant_issues, org_id; limit = limit, cycle = cycle, auth = api_key)
+    sunlight_test(registrant_bills, org_id; limit = limit, cycle = cycle, auth = api_key)
+    sunlight_test(registrant_lobbyists, org_id; limit = limit, cycle = cycle, auth = api_key)
+    sunlight_test(mentions_in_regulations, org_id; limit = limit, cycle = cycle, auth = api_key)
+    sunlight_test(regulatory_comment_submissions, org_id; limit = limit, cycle = cycle, auth = api_key)
+    sunlight_test(faca_memberships, org_id; limit = limit, cycle = cycle, auth = api_key)
+    sunlight_test(fec_summary, org_id; auth = api_key)
+
 
 end
 

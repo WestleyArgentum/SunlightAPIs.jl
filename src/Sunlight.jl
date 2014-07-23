@@ -7,7 +7,7 @@ using JSON
 using HttpCommon
 using Requests
 
-# entity types (organization, individual, politician)
+# Entity types (organization, individual, politician)
 export Entity, Org, Ind, Pol
 
 # Influence Explorer API
@@ -28,7 +28,21 @@ export entity_search,
        party_breakdown,
        lobbying_registrants,
        lobbying_clients,
-       lobbying_issues
+       lobbying_issues,
+       top_organizations,
+       top_recipients,
+       pac_recipients,
+       state_federal_breakdown,
+       lobbing_registrants,
+       bills,
+       lobbyists,
+       registrant_clients,
+       registrant_issues,
+       registrant_bills,
+       registrant_lobbyists,
+       mentions_in_regulations,
+       regulatory_comment_submissions,
+       faca_memberships
 
 include("utils.jl")
 include("influence-explorer.jl")

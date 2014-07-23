@@ -70,6 +70,17 @@ end
 
 # -------
 
+party_breakdown(::String, ::String; options...) = error("'party_breakdown(entity_id::String)' is ambiguous; the method is defined for Organizations and Individuals. Try passing in `Org(entity_id)` or `Ind(entity_id)`")
+party_breakdown(::String; options...) = error("'party_breakdown(entity_id::String)' is ambiguous; the method is defined for Organizations and Individuals. Try passing in `Org(entity_id)` or `Ind(entity_id)`")
+
+lobbying_issues(::String, ::String; options...) = error("'lobbying_issues(entity_id::String)' is ambiguous; the method is defined for Organizations and Individuals. Try passing in `Org(entity_id)` or `Ind(entity_id)`")
+lobbying_issues(::String; options...) = error("'lobbying_issues(entity_id::String)' is ambiguous; the method is defined for Organizations and Individuals. Try passing in `Org(entity_id)` or `Ind(entity_id)`")
+
+fec_summary(::String, ::String; options...) = error("'fec_summary(entity_id::String)' is ambiguous; the method is defined for Organizations and Politicians. Try passing in `Org(entity_id)` or `Pol(entity_id)`")
+fec_summary(::String, options...) = error("'fec_summary(entity_id::String)' is ambiguous; the method is defined for Organizations and Politicians. Try passing in `Org(entity_id)` or `Pol(entity_id)`")
+
+# -------
+
 @sunlight_method__id_limit_cycle "top_contributors" Union(String, Pol) id->"/api/1.0/aggregates/pol/$id/contributors.json"
 
 @sunlight_method__id_limit_cycle "top_industries" Union(String, Pol) id->"/api/1.0/aggregates/pol/$id/contributors/industries.json"
@@ -97,6 +108,38 @@ end
 @sunlight_method__id_limit_cycle "lobbying_clients" Union(String, Ind) id->"/api/1.0/aggregates/indiv/$id/clients.json"
 
 @sunlight_method__id_limit_cycle "lobbying_issues" Union(String, Ind) id->"/api/1.0/aggregates/indiv/$id/issues.json"
+
+@sunlight_method__id_limit_cycle "top_recipients" Union(String, Org) id->"/api/1.0/aggregates/org/$id/recipients.json"
+
+@sunlight_method__id_limit_cycle "pac_recipients" Union(String, Org) id->"/api/1.0/aggregates/org/$id/recipient_pacs.json"
+
+@sunlight_method__id_cycle "party_breakdown" Union(String, Org) id->"/api/1.0/aggregates/org/$id/recipients/party_breakdown.json"
+
+@sunlight_method__id_cycle "state_federal_breakdown" Union(String, Org) id->"/api/1.0/aggregates/org/$id/recipients/level_breakdown.json"
+
+@sunlight_method__id_limit_cycle "lobbing_registrants" Union(String, Org) id->"/api/1.0/aggregates/org/$id/registrants.json"
+
+@sunlight_method__id_limit_cycle "lobbying_issues" Union(String, Org) id->"/api/1.0/aggregates/org/$id/issues.json"
+
+@sunlight_method__id_limit_cycle "bills" Union(String, Org) id->"/api/1.0/aggregates/org/$id/bills.json"
+
+@sunlight_method__id_limit_cycle "lobbyists" Union(String, Org) id->"/api/1.0/aggregates/org/$id/lobbyists.json"
+
+@sunlight_method__id_limit_cycle "registrant_clients" Union(String, Org) id->"/api/1.0/aggregates/org/$id/registrant/clients.json"
+
+@sunlight_method__id_limit_cycle "registrant_issues" Union(String, Org) id->"/api/1.0/aggregates/org/$id/registrant/issues.json"
+
+@sunlight_method__id_limit_cycle "registrant_bills" Union(String, Org) id->"/api/1.0/aggregates/org/$id/registrant/bills.json"
+
+@sunlight_method__id_limit_cycle "registrant_lobbyists" Union(String, Org) id->"/api/1.0/aggregates/org/$id/registrant/lobbyists.json"
+
+@sunlight_method__id_limit_cycle "mentions_in_regulations" Union(String, Org) id->"/api/1.0/aggregates/org/$id/regulations_text.json"
+
+@sunlight_method__id_limit_cycle "regulatory_comment_submissions" Union(String, Org) id->"/api/1.0/aggregates/org/$id/regulations_submitter.json"
+
+@sunlight_method__id_limit_cycle "faca_memberships" Union(String, Org) id->"/api/1.0/aggregates/org/$id/faca.json"
+
+@sunlight_method__id "fec_summary" Union(String, Org) id->"/api/1.0/aggregates/org/$id/fec_summary.json"
 
 # -------
 
@@ -143,3 +186,14 @@ function top_individuals(auth::String; limit = 16, cycle = nothing, options...)
 end
 
 top_individuals(; auth = "", options...) = top_individuals(auth; options...)
+
+# -------
+
+function top_organizations(auth::String; limit = 16, cycle = nothing, options...)
+    args = Dict()
+    cycle != nothing && (args["cycle"] = cycle)
+
+    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/orgs/top_$limit.json", args; options...)
+end
+
+top_organizations(; auth = "", options...) = top_organizations(auth; options...)
