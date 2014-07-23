@@ -48,3 +48,7 @@ function runtests(api_key; pol_id = "597e02e7d1b04d83976913da1b8e2998",
 
 end
 
+# -------
+# Run these tests automatically when an api-key is passed as the first arg on startup
+
+!isempty(ARGS) && runtests(ARGS[1])
