@@ -30,6 +30,7 @@ end
 function runtests(api_key; pol_id = Pol("597e02e7d1b04d83976913da1b8e2998"),
                            ind_id = Ind("a03df5d9b20e467fa0ceaefa94c4491e"),
                            org_id = Org("52a1620b2ff543ebb74718fbff742529"),
+                           industry_id = "165d820dd48441e1befdc47f3fa3d236",
                            limit = 1,
                            cycle = 2012)
 
@@ -63,7 +64,7 @@ function runtests(api_key; pol_id = Pol("597e02e7d1b04d83976913da1b8e2998"),
     sunlight_test(regulatory_comment_submissions, org_id; limit = limit, cycle = cycle, auth = api_key)
     sunlight_test(faca_memberships, org_id; limit = limit, cycle = cycle, auth = api_key)
     sunlight_test(fec_summary, org_id; auth = api_key)
-
+    sunlight_test(top_industry_organizations, industry_id; limit = limit, cycle = cycle, auth = api_key)
 
 end
 

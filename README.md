@@ -395,3 +395,25 @@ fec_summary(auth::String, entity_id::Union(String, Org))
 
 fec_summary(entity_id::Union(String, Org); auth = "")
 ```
+
+
+### Industry Aggregates
+
+#### Top Industries
+By contributions given, in dollars.
+
+```julia
+top_industries(auth::String; limit = 16, cycle = nothing)
+
+top_industries(; auth = "", limit = 16, cycle = nothing)
+```
+
+
+#### Top Industry Organizations
+Top organizations in an industry by dollars contributed.
+
+```julia
+top_industry_organizations(auth::String, entity_id::String; limit = nothing, cycle = nothing)
+
+top_industry_organizations(entity_id::String; auth = "", limit = nothing, cycle = nothing)
+```

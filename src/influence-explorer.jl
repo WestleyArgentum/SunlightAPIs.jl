@@ -141,6 +141,8 @@ fec_summary(::String, options...) = error("'fec_summary(entity_id::String)' is a
 
 @sunlight_method__id "fec_summary" Union(String, Org) id->"/api/1.0/aggregates/org/$id/fec_summary.json"
 
+@sunlight_method__id_limit_cycle "top_industry_organizations" String id->"/api/1.0/aggregates/industry/$id/orgs.json"
+
 # -------
 
 function entity_search(auth::String, search_str; entity_type = nothing, options...)
@@ -197,3 +199,14 @@ function top_organizations(auth::String; limit = 16, cycle = nothing, options...
 end
 
 top_organizations(; auth = "", options...) = top_organizations(auth; options...)
+
+# -------
+
+function top_industries(auth::String; limit = 16, cycle = nothing, options...)
+    args = Dict()
+    cycle != nothing && (args["cycle"] = cycle)
+
+    sunlight_get(auth, INFLUENCE_EXPLORER_API, "/api/1.0/aggregates/industries/top_$limit.json", args; options...)
+end
+
+top_industries(; auth = "", options...) = top_industries(auth; options...)

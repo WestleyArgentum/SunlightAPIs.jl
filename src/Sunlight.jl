@@ -42,7 +42,9 @@ export entity_search,
        registrant_lobbyists,
        mentions_in_regulations,
        regulatory_comment_submissions,
-       faca_memberships
+       faca_memberships,
+       top_industries,
+       top_industry_organizations
 
 include("utils.jl")
 include("influence-explorer.jl")
