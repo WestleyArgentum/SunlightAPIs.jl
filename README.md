@@ -14,7 +14,7 @@
 Many of methods in the Influence Explorer API accept similar arguments. To reduce redundancy, these are documented once, below. Not all methods accept all common parameters - be sure to check the function signature in the docs further down.
 
 - `auth`: Your Sunlight API key ([get one here](http://sunlightfoundation.com/api/)).
-- `entity_id`: The transparencydata ID of the entity that you'd like to look up.
+- `entity_id`: The transparencydata ID of the entity that you'd like to look up. Most methods will accept the ID as a `String`, however, sometimes this can cause ambiguity (for instance,`fec_summary` is defined for both Organizations and Politicians). For these cases the `Org` (Organization), `Ind` (Individual), and `Pol` (Politician) types are defined to wrap IDs (i.e. `Org(entity_id)`).
 - `cycle`: Use to limit results by cycle(s).
 - `limit`: Use to limit the number of results to be returned.
 
@@ -62,9 +62,9 @@ top_politicians(; auth = "", limit = 16, cycle = nothing)
 The top contributing organizations to a given candidate. Giving is broken down into money given directly (by the organization's PAC), versus money given by individuals employed by or associated with the organization.
 
 ```julia
-top_contributors(auth::String, entity_id; limit = nothing, cycle = nothing)
+top_contributors(auth::String, entity_id::Union(String, Pol); limit = nothing, cycle = nothing)
 
-top_contributors(entity_id; auth = "", limit = nothing, cycle = nothing)
+top_contributors(entity_id::Union(String, Pol); auth = "", limit = nothing, cycle = nothing)
 ```
 
 
@@ -72,9 +72,9 @@ top_contributors(entity_id; auth = "", limit = nothing, cycle = nothing)
 Top contributing industries, ranked by dollars given.
 
 ```julia
-top_industries(auth::String, entity_id; limit = nothing, cycle = nothing)
+top_industries(auth::String, entity_id::Union(String, Pol); limit = nothing, cycle = nothing)
 
-top_industries(entity_id; auth = "", limit = nothing, cycle = nothing)
+top_industries(entity_id::Union(String, Pol); auth = "", limit = nothing, cycle = nothing)
 ```
 
 
@@ -82,9 +82,9 @@ top_industries(entity_id; auth = "", limit = nothing, cycle = nothing)
 Contribution count and total for a politician from unknown industries.
 
 ```julia
-unknown_industries(auth::String, entity_id; cycle = nothing)
+unknown_industries(auth::String, entity_id::Union(String, Pol); cycle = nothing)
 
-unknown_industries(entity_id; auth = "", cycle = nothing)
+unknown_industries(entity_id::Union(String, Pol); auth = "", cycle = nothing)
 ```
 
 
@@ -107,9 +107,9 @@ Contribution totals by sector to a given politician. Sectors are codified by let
 - `Z`: Administrative Use
 
 ```julia
-top_sectors(auth::String, entity_id; limit = nothing, cycle = nothing)
+top_sectors(auth::String, entity_id::Union(String, Pol); limit = nothing, cycle = nothing)
 
-top_sectors(entity_id; auth = "", limit = nothing, cycle = nothing)
+top_sectors(entity_id::Union(String, Pol); auth = "", limit = nothing, cycle = nothing)
 ```
 
 
@@ -117,9 +117,9 @@ top_sectors(entity_id; auth = "", limit = nothing, cycle = nothing)
 A breakdown of how much of the money raised by a politician came from inside or outside their home state.
 
 ```julia
-local_breakdown(auth::String, entity_id; cycle = nothing)
+local_breakdown(auth::String, entity_id::Union(String, Pol); cycle = nothing)
 
-local_breakdown(entity_id; auth = "", cycle = nothing)
+local_breakdown(entity_id::Union(String, Pol); auth = "", cycle = nothing)
 ```
 
 
@@ -127,9 +127,9 @@ local_breakdown(entity_id; auth = "", cycle = nothing)
 A breakdown of how much of the money raised came from individuals versus organzations (PACs).
 
 ```julia
-contributor_breakdown(auth::String, entity_id; cycle = nothing)
+contributor_breakdown(auth::String, entity_id::Union(String, Pol); cycle = nothing)
 
-contributor_breakdown(entity_id; auth = "", cycle = nothing)
+contributor_breakdown(entity_id::Union(String, Pol); auth = "", cycle = nothing)
 ```
 
 
@@ -137,9 +137,9 @@ contributor_breakdown(entity_id; auth = "", cycle = nothing)
 Latest figures from the FEC's summary report.
 
 ```julia
-fec_summary(auth::String, entity_id)
+fec_summary(auth::String, entity_id::Pol)
 
-fec_summary(entity_id; auth = "")
+fec_summary(entity_id::Pol; auth = "")
 ```
 
 
@@ -147,9 +147,9 @@ fec_summary(entity_id; auth = "")
 Top independent expenditures for and against a politician.
 
 ```julia
-fec_independent_expenditures(auth::String, entity_id)
+fec_independent_expenditures(auth::String, entity_id::Union(String, Pol))
 
-fec_independent_expenditures(entity_id; auth = "")
+fec_independent_expenditures(entity_id::Union(String, Pol); auth = "")
 ```
 
 
@@ -169,9 +169,9 @@ top_individuals(; auth = "", limit = 16, cycle = nothing)
 Top organizations to which this individual has donated, by dollars given.
 
 ```julia
-top_recipient_organizations(auth::String, entity_id; limit = nothing, cycle = nothing)
+top_recipient_organizations(auth::String, entity_id::Union(String, Ind); limit = nothing, cycle = nothing)
 
-top_recipient_organizations(entity_id; auth = "", limit = nothing, cycle = nothing)
+top_recipient_organizations(entity_id::Union(String, Ind); auth = "", limit = nothing, cycle = nothing)
 ```
 
 
@@ -179,9 +179,9 @@ top_recipient_organizations(entity_id; auth = "", limit = nothing, cycle = nothi
 Politicians to whom the individual has given the most money.
 
 ```julia
-top_recipient_politicians(auth::String, entity_id; limit = nothing, cycle = nothing)
+top_recipient_politicians(auth::String, entity_id::Union(String, Ind); limit = nothing, cycle = nothing)
 
-top_recipient_politicians(entity_id; auth = "", limit = nothing, cycle = nothing)
+top_recipient_politicians(entity_id::Union(String, Ind); auth = "", limit = nothing, cycle = nothing)
 ```
 
 
@@ -189,9 +189,9 @@ top_recipient_politicians(entity_id; auth = "", limit = nothing, cycle = nothing
 Details on how much an individual gave to each party.
 
 ```julia
-party_breakdown(auth::String, entity_id; cycle = nothing)
+party_breakdown(auth::String, entity_id::Ind; cycle = nothing)
 
-party_breakdown(entity_id; auth = "", cycle = nothing)
+party_breakdown(entity_id::Ind; auth = "", cycle = nothing)
 ```
 
 
@@ -199,9 +199,9 @@ party_breakdown(entity_id; auth = "", cycle = nothing)
 A list of the lobbying firms which employed an individual.
 
 ```julia
-lobbying_registrants(auth::String, entity_id; limit = nothing, cycle = nothing)
+lobbying_registrants(auth::String, entity_id::Union(String, Ind); limit = nothing, cycle = nothing)
 
-lobbying_registrants(entity_id; auth = "", limit = nothing, cycle = nothing)
+lobbying_registrants(entity_id::Union(String, Ind); auth = "", limit = nothing, cycle = nothing)
 ```
 
 
@@ -209,9 +209,9 @@ lobbying_registrants(entity_id; auth = "", limit = nothing, cycle = nothing)
 Clients an individual (lobbyist) was contracted to work for.
 
 ```julia
-lobbying_clients(auth::String, entity_id; limit = nothing, cycle = nothing)
+lobbying_clients(auth::String, entity_id::Union(String, Ind); limit = nothing, cycle = nothing)
 
-lobbying_clients(entity_id; auth = "", limit = nothing, cycle = nothing)
+lobbying_clients(entity_id::Union(String, Ind); auth = "", limit = nothing, cycle = nothing)
 ```
 
 
@@ -219,9 +219,9 @@ lobbying_clients(entity_id; auth = "", limit = nothing, cycle = nothing)
 Issue areas a lobbyist worked on.
 
 ```julia
-lobbying_issues(auth::String, entity_id; limit = nothing, cycle = nothing)
+lobbying_issues(auth::String, entity_id::Ind; limit = nothing, cycle = nothing)
 
-lobbying_issues(entity_id; auth = "", limit = nothing, cycle = nothing)
+lobbying_issues(entity_id::Ind; auth = "", limit = nothing, cycle = nothing)
 ```
 
 
@@ -261,9 +261,9 @@ pac_recipients(entity_id::Union(String, Org); auth = "", limit = nothing, cycle 
 Portion of giving from an organization that went to each party.
 
 ```julia
-party_breakdown(auth::String, entity_id::Union(String, Org); cycle = nothing)
+party_breakdown(auth::String, entity_id::Org; cycle = nothing)
 
-party_breakdown(entity_id::Union(String, Org); auth = "", cycle = nothing)
+party_breakdown(entity_id::Org; auth = "", cycle = nothing)
 ```
 
 
@@ -291,9 +291,9 @@ lobbing_registrants(entity_id::Union(String, Org); auth = "", limit = nothing, c
 Issue areas an organization has hired lobbyists for.
 
 ```julia
-lobbying_issues(auth::String, entity_id::Union(String, Org); limit = nothing, cycle = nothing)
+lobbying_issues(auth::String, entity_id::Org; limit = nothing, cycle = nothing)
 
-lobbying_issues(entity_id::Union(String, Org); auth = "", limit = nothing, cycle = nothing)
+lobbying_issues(entity_id::Org; auth = "", limit = nothing, cycle = nothing)
 ```
 
 
