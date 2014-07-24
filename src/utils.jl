@@ -1,6 +1,6 @@
 
-function handle_error(resp::Response)
-
+function handle_error(r::Response)
+    r.status != 200 && throw(r)
 end
 
 # -------
