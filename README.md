@@ -5,6 +5,53 @@
 ## Quick start
 
 ```julia
+julia> Pkg.add("Sunlight")
+
+julia> using Sunlight
+
+julia> my_auth = "your-api-key"
+"*******************"
+
+julia> entity_search(my_auth, "obama"; entity_type = "politician")
+2-element Array{Any,1}:
+ ["is_superpac"=>nothing,"total_given"=>0.0,"firm_income"=>0.0,"state"=>"","name"=>"Barack Obama (D)","id"=>"4148b26f6f1c437cb50ea9ca4699417a","total_received"=>7.14694967e8,"count_given"=>0,"count_lobbied"=>0,"count_received"=>1335528,"seat"=>"federal:president","lobbying_firm"=>nothing,"party"=>"D","type"=>"politician","non_firm_spending"=>0.0]
+ ["is_superpac"=>nothing,"total_given"=>0.0,"firm_income"=>0.0,"state"=>"IL","name"=>"OBAMA, BARACK","id"=>"97737bb56b6a4211bcc57a837368b1a4","total_received"=>445595.36,"count_given"=>0,"count_lobbied"=>0,"count_received"=>892,"seat"=>"state:upper","lobbying_firm"=>nothing,"party"=>"D","type"=>"politician","non_firm_spending"=>0.0]
+
+julia> entity_info(my_auth, "4148b26f6f1c437cb50ea9ca4699417a")
+Dict{String,Any} with 6 entries:
+  "name"         => "Barack Obama (D)"
+  "totals"       => ["2014"=>["fec_total_raised"=>0.0,"faca_committee_count"=>0,"firm_income"=>0.0…
+  "external_ids" => {["namespace"=>"urn:crp:recipient","id"=>"N00009638"],["namespace"=>"urn:fec:c…
+  "id"           => "4148b26f6f1c437cb50ea9ca4699417a"
+  "metadata"     => ["2014"=>["district"=>"","state_held"=>"","seat_held"=>"federal:president","se…
+  "type"         => "politician"
+
+julia> top_contributors(my_auth, "4148b26f6f1c437cb50ea9ca4699417a"; limit = 3, cycle = 2008)
+3-element Array{Any,1}:
+ ["name"=>"University of California","direct_count"=>"0","total_count"=>"3356","total_amount"=>"1638228.00","employee_amount"=>"1638228.00","id"=>"0e85264c0c0e4dfb9a4b38cfc181f030","direct_amount"=>"0","employee_count"=>"3356"]
+ ["name"=>"Goldman Sachs","direct_count"=>"0","total_count"=>"879","total_amount"=>"1001195.00","employee_amount"=>"1001195.00","id"=>"597eccfe48784677a437569ff6293097","direct_amount"=>"0","employee_count"=>"879"]
+ ["name"=>"Harvard University","direct_count"=>"0","total_count"=>"1398","total_amount"=>"859747.00","employee_amount"=>"859747.00","id"=>"74a1dca1259b4f60bca481d4c76e2a1f","direct_amount"=>"0","employee_count"=>"1398"]
+
+julia> top_organizations(my_auth; limit = 12)
+12-element Array{Any,1}:
+ ["amount"=>"384272261.37","name"=>"National Education Assn","id"=>"1b8fea7e453d4e75841eac48ff9df550","count"=>"57835"]
+ ["amount"=>"275880888.86","name"=>"Service Employees International Union","id"=>"e31bfef434e9470b9e473d6182f2d021","count"=>"35011"]
+ ["amount"=>"181691570.75","name"=>"American Fedn of St/Cnty/Munic Employees","id"=>"fb702029157e4c7c887172eba71c66c5","count"=>"43635"]
+ ["amount"=>"174018345.66","name"=>"National Assn of Realtors","id"=>"bb98402bd4d3471cad392a671ecd733a","count"=>"92925"]
+ ["amount"=>"112448960.46","name"=>"Altria Group","id"=>"0785a40a08df4dada2f083631efecb34","count"=>"21199"]
+ ["amount"=>"110349716.14","name"=>"American Federation of Teachers","id"=>"73a89c3b554945cd8228fa82fc53b73a","count"=>"32445"]
+ ["amount"=>"108195067.94","name"=>"Intl Brotherhood of Electrical Workers","id"=>"b53b4ad137d743a996f4d7467700fc88","count"=>"53828"]
+ ["amount"=>"99742982.84","name"=>"Republican Governors Assn","id"=>"bdfd0d138c4c474d842a6e4d85aa8b0a","count"=>"481"]
+ ["amount"=>"99131444.53","name"=>"Philip Morris","id"=>"f3b0421dc8204f048a9b358376df8131","count"=>"23570"]
+ ["amount"=>"94524750.12","name"=>"Laborers Union","id"=>"6f6d63baaa6c4f5c9c739596e65b020e","count"=>"34531"]
+ ["amount"=>"94172506.40","name"=>"Penn National Gaming","id"=>"24cab44f502f415dbfd32f8e7b1b7c5b","count"=>"1964"]
+ ["amount"=>"93127912.28","name"=>"AT&T Inc","id"=>"d473e580c5684a658b754eb97566cb05","count"=>"73320"]
+
+julia> registrant_bills(my_auth, "d473e580c5684a658b754eb97566cb05"; limit = 3)
+3-element Array{Any,1}:
+ ["cycle"=>-1,"bill_no"=>1447,"count"=>12,"title"=>"Connecting America Act of 2009","bill_name"=>"S.1447","congress_no"=>111,"bill_type"=>"s"]
+ ["cycle"=>-1,"bill_no"=>422,"count"=>8,"title"=>"","bill_name"=>"H.R.422","congress_no"=>111,"bill_type"=>"h"]
+ ["cycle"=>-1,"bill_no"=>400,"count"=>8,"title"=>"Protecting Consumers through Proper Forbearance Procedures Act","bill_name"=>"H.R.400","congress_no"=>111,"bill_type"=>"h"]
 ```
 
 
