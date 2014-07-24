@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) 2014 Westley Argentum Hennigh and [other contributers](http://github.com/WestleyArgentum/Sunlight.jl/graphs/contributors)
+Copyright (c) 2014 Westley Argentum Hennigh and [other contributers](http://github.com/WestleyArgentum/SunlightAPIs.jl/graphs/contributors)
 
 ```
 Permission is hereby granted, free of charge, to any person obtaining a copy of

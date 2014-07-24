@@ -1,13 +1,13 @@
-# Sunlight.jl
+# SunlightAPIs.jl
 
 ##### A Julia package for interfacing with the Sunlight Foundation's APIs
 
 ## Quick start
 
 ```julia
-julia> Pkg.add("Sunlight")
+julia> Pkg.add("SunlightAPIs")
 
-julia> using Sunlight
+julia> using SunlightAPIs
 
 julia> my_auth = "your-api-key"
 "*******************"

@@ -1,5 +1,5 @@
 
-module Sunlight
+module SunlightAPIs
 
 import Base.print
 

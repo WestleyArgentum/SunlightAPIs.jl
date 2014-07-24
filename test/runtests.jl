@@ -1,5 +1,5 @@
 
-using Sunlight
+using SunlightAPIs
 using Base.Test
 
 function sunlight_test(fn, args...; auth = "", named_args...)
