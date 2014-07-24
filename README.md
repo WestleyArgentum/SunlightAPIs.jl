@@ -28,7 +28,7 @@ entity_search(auth::String, search_str; entity_type = nothing)
 
 entity_search(search_str; auth = "", entity_type = nothing)
 ```
-- `search`: The name to search for. Spaces should be URL encoded or represented as a plus sign (+). There are no logical operators and no grouping.
+- `search`: The name to search for. There are no logical operators and no grouping.
 - `type`:   Filter results to a particular type of entity.
     * `"politician"`
     * `"organization"`
