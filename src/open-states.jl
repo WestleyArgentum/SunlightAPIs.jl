@@ -5,7 +5,7 @@ global OPEN_STATES_API = URI("http://openstates.org/")
 
 # -------
 
-function get_metadata_overview(auth::String, options...)
+function metadata_overview(auth::String, options...)
     args = Dict()
 
     sunlight_get(auth, OPEN_STATES_API, "/api/v1/metadata/", args; options...)
@@ -15,7 +15,7 @@ end
 
 # -------
 
-function get_state_metadata(auth::String, state, options...)
+function state_metadata(auth::String, state, options...)
     args = Dict()
 
     sunlight_get(auth, OPEN_STATES_API, "/api/v1/metadata/$state/", args; options...)

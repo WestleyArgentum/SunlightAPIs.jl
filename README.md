@@ -324,7 +324,7 @@ state_federal_breakdown(entity_id::Union(String, Org); auth = "", cycle = nothin
 ```
 
 
-#### Lobbing Registrants
+#### Lobbying Registrants
 Lobbying firms hired by an organization.
 
 ```julia
@@ -425,7 +425,7 @@ regulatory_comment_submissions(entity_id::Union(String, Org); auth = "", limit =
 
 
 #### FACA Memberships
-Lists employees of an organization ith memberships on federal advisory committees.
+Lists employees of an organization with memberships on federal advisory committees.
 
 ```julia
 faca_memberships(auth::String, entity_id::Union(String, Org); limit = nothing, cycle = nothing)
@@ -464,3 +464,184 @@ top_industry_organizations(auth::String, entity_id::String; limit = nothing, cyc
 
 top_industry_organizations(entity_id::String; auth = "", limit = nothing, cycle = nothing)
 ```
+
+## Open States API
+
+### Common Parameters
+Many of methods in the Influence Explorer API accept similar arguments. To reduce redundancy, these are documented once, below. Not all methods accept all common parameters - be sure to check the function signature in the docs further down.
+
+- `auth`: Your Sunlight API key ([get one here](http://sunlightfoundation.com/api/)).
+- `state`: This variable always takes the two-letter state abbreviation, rather than a full state name.
+
+
+### State Metadata Methods
+
+#### Metadata Overview
+Get list of all states with data available and basic metadata about their status.
+
+```julia
+get_metadata_overview(auth::String)
+```
+
+#### State Metadata
+Get general information about the given entity.
+
+```julia
+get_state_metadata(auth::String, state)
+```
+- `state`: The state to search for, a required value.
+
+
+### Bill Methods
+
+#### Bill Search
+Search bills by (almost) any of their attributes, or full text.  At least one of the filters must be specified.
+
+```julia
+bill_search(auth::String; state=nothing, chamber=nothing, bill_id=nothing, bill_id__in=nothing, 
+            q=nothing, search_window=nothing, updated_since=nothing, sponsor_id=nothing, 
+            subject=nothing, bill_type=nothing, sort=nothing, page=nothing, per_page=nothing)
+```
+- `state`: Only return bills from a given state.
+- `chamber`: Only return bills from a given chamber (e.g. lower).
+- `bill_id`: Only return bills with a given bill_id.
+- `bill_id__in`: Accepts a pipe delimited list of bill ids.
+- `q`: Only return bills matching the provided full text query.
+- `search_window`: Filter results to a given time, specified by one of the following options:
+    * `"all"` (default if none specified, includes all sessions)
+    * `"term"` (only bills from sessions within the current term)
+    * `"session"` (only bills from the current session)
+    * `"session:YYYY"` (only bills from the session in the specified year)
+    * `"session:YYYY-YYYY"` (only bills from the session in the specified year range)
+- `updated_since`: Only bills updated since a provided date (provided in YYYY-MM-DD format).
+- `sponsor_id`: Only bills sponsored by a given legislator id (e.g. 'ILL000555').
+- `subject`: Only bills categorized by Open States as belonging to this subject.
+- `bill_type`: Only bills of a given type (e.g. 'bill', 'resolution', etc.)
+- `sort`: Sort-order of results, defaults to 'last', options are:
+    * `"first"`
+    * `"last"`
+    * `"signed"`
+    * `"passed_lower"`
+    * `"passed_upper"`
+    * `"updated_at"`
+    * `"created_at"`
+- `page`: Page of results, each of size per_page (defaults to 1).
+- `per_page`: Number of results per page, is unlimited unless page is set, in which case it defaults to 50.
+
+
+#### Bill Detail
+This method returns the full detail object for a bill.  User can specify either the unique Open States ID for the bill (as `open_states_id`), or must specify the three parameters of `state`, `bill_id`, and `cycle`.
+
+```julia
+bill_search(auth::String; open_states_id=nothing, state=nothing, bill_id=nothing, cycle = nothing)
+```
+- `open_states_id`: Unique Open States ID for a given bill.
+- `state`: State.
+- `bill_id`: Bill's ID within the state legislature
+- `cycle`: YYYYYYYY (i.e. "20092010"), for the time range in which the bill was proposed).
+
+
+
+### Legislator Methods
+
+#### Legislator Search
+Search legislators by their attributes.  At least one named filter parameter must be provided.
+
+```julia
+legislator_search(auth::String; state=nothing, first_name=nothing, last_name=nothing, chamber=nothing, 
+                  active=nothing, term=nothing, district=nothing, party=nothing)
+```
+- `state`: Only return legislators from a given state.
+- `first_name`: Only return legislators with a given first name.
+- `last_name`: Only return legislators with a given last name.
+- `chamber`: Only return legislators from a given chamber (e.g. lower).
+- `active`: `true` (default) to only include current legislators, `false` will include all legislators.
+- `term`: Only legislators that have a role in a certain term.
+- `district`: Only legislators that have represented the specified district.
+- `party`: Only legislators that have been associated with a specified party.
+
+
+#### Legislator Detail
+This method returns the full detail for a legislator.
+
+```julia
+legislator_detail(auth::String, leg_id)
+```
+- `leg_id`: Return the legislator with the specified ID.
+
+
+#### Geo Lookup
+Lookup all legislators serving districts containing a given location, specified by latitude and longitude.
+
+```julia
+geo_lookup(auth::String; lat=nothing, long=nothing)
+```
+- `lat`: Latitude contained in district.
+- `long`: Longitude contained in district.
+
+
+
+### Committee Methods
+
+#### Committee Search
+Search committees by any of their attributes.
+
+```julia
+committee_search(auth::String; committee=nothing, subcommittee=nothing, chamber=nothing, state=nothing)
+```
+- `state`: Only return committees from a given state.
+- `chamber`: Only return committees from a given chamber (e.g. lower).
+- `committee`: Search by committee (i.e. "Finance and Revenue").
+- `subcommittee`: Search by subcommittee. If `null`, object represents the committee.
+
+
+#### Committee Detail
+Get full detail for committee, including all members.
+
+```julia
+committee_detail(auth::String, committee_id)
+```
+- `committee_id`: Return the committee with the specified ID.
+
+
+### Event Methods
+
+#### Event Search
+Search events by state and type.
+
+```julia
+event_search(auth::String; state=nothing, event_type=nothing, format=nothing)
+```
+- `state`: Only return events from a given state.
+- `type`: Only return events with a given type. ('committee:meeting' for now)
+- `format`: Can be 'rss' or 'ics', or not specified.
+
+
+#### Committee Detail
+Get full detail for event.
+
+```julia
+event_detail(auth::String, event_id)
+```
+- `event_id`: Return the event with the specified ID.
+
+
+### District Methods
+
+#### District Search
+List districts for state (and optionally filtered by chamber).
+
+```julia
+district_search(auth::String; state=nothing, chamber=nothing)
+```
+- `state`: Return districts from a given state. Mandatory parameter.
+- `chamber`: Only return districts with a specified chamber. Optional parameter.
+
+
+#### District Boundary Lookup
+This method returns an full district object, including the boundary given a `boundary_id`.
+
+```julia
+district_boundary_lookup(auth::String, boundary_id)
+```
+- `boundary_id`: Return the district with the specified boundary ID.
