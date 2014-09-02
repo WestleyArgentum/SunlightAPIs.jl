@@ -468,7 +468,7 @@ top_industry_organizations(entity_id::String; auth = "", limit = nothing, cycle 
 ## Open States API
 
 ### Common Parameters
-Many of methods in the Influence Explorer API accept similar arguments. To reduce redundancy, these are documented once, below. Not all methods accept all common parameters - be sure to check the function signature in the docs further down.
+Many of methods in the Open States API accept similar arguments. To reduce redundancy, these are documented once, below. Not all methods accept all common parameters - be sure to check the function signature in the docs further down.
 
 - `auth`: Your Sunlight API key ([get one here](http://sunlightfoundation.com/api/)).
 - `state`: This variable always takes the two-letter state abbreviation, rather than a full state name.
