@@ -15,7 +15,7 @@ end
 
 # -------
 
-function get_state_metadata(auth::String; state, options...)
+function get_state_metadata(auth::String, state, options...)
     args = Dict()
 
     sunlight_get(auth, OPEN_STATES_API, "/api/v1/metadata/$state/", args; options...)
