@@ -44,9 +44,25 @@ export entity_search,
        regulatory_comment_submissions,
        faca_memberships,
        top_industries,
-       top_industry_organizations
+       top_industry_organizations,
+       get_metadata_overview,
+       get_state_metadata,
+       bill_search,
+       bill_detail,
+       legislator_search,
+       legislator_detail,
+       geo_lookup,
+       committee_search,
+       committee_detail,
+       event_search,
+       event_detail,
+       district_search,
+       district_boundary_lookup
+
+
 
 include("utils.jl")
 include("influence-explorer.jl")
+include("open-states.jl")
 
 end
