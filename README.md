@@ -533,7 +533,7 @@ bill_search(auth::String; state=nothing, chamber=nothing, bill_id=nothing, bill_
 This method returns the full detail object for a bill.  User can specify either the unique Open States ID for the bill (as `open_states_id`), or must specify the three parameters of `state`, `bill_id`, and `cycle`.
 
 ```julia
-bill_search(auth::String; open_states_id=nothing, state=nothing, bill_id=nothing, cycle = nothing)
+bill_detail(auth::String; open_states_id=nothing, state=nothing, bill_id=nothing, cycle = nothing)
 ```
 - `open_states_id`: Unique Open States ID for a given bill.
 - `state`: State.
